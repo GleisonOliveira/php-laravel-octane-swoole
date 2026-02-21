@@ -43,7 +43,8 @@ RUN apk add --no-cache \
         libjpeg-turbo \
         freetype \
         curl \
-        libxml2
+        libxml2 \
+        libstdc++
 
 # -----------------------------
 # Composer
@@ -54,9 +55,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Usuário não-root
 # -----------------------------
 RUN addgroup -g 1000 -S appuser \
-    && adduser -u 1000 -S appuser -G appuser \
-    && mkdir -p /app \
-    && chown -R appuser:appuser /app
+    && adduser -u 1000 -S appuser -G appuser 
 
 # Arquivo ini do Opcache com placeholders
 RUN echo "opcache.enable=${OPCACHE_ENABLE}" > /usr/local/etc/php/conf.d/opcache.ini \
@@ -64,5 +63,3 @@ RUN echo "opcache.enable=${OPCACHE_ENABLE}" > /usr/local/etc/php/conf.d/opcache.
     && echo "opcache.memory_consumption=${OPCACHE_MEMORY}" >> /usr/local/etc/php/conf.d/opcache.ini \
     && echo "opcache.max_accelerated_files=${OPCACHE_MAX_FILES}" >> /usr/local/etc/php/conf.d/opcache.ini \
     && echo "opcache.validate_timestamps=${OPCACHE_VALIDATE_TIMESTAMPS}" >> /usr/local/etc/php/conf.d/opcache.ini
-
-USER appuser
