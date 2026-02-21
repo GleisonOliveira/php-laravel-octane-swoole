@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Docker/
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# IDEs e Sistema Operacional
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Assets e Build
+public/hot
+public/storage
+public/build/
+mix-manifest.json
+package-lock.json
+yarn.lock
+
+vendor
+node_modules
+.git
