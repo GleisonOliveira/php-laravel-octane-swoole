@@ -28,7 +28,8 @@ RUN apk add --no-cache --virtual .build-deps \
         fileinfo \
         gd \
         opcache
-
+        
+RUN docker-php-ext-install pcntl
 RUN pecl install swoole-6.1.6 redis \
     && docker-php-ext-enable swoole redis \
     && apk del .build-deps \
